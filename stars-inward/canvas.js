@@ -12,11 +12,7 @@ window.addEventListener("resize", function(){
 
 for(var i = 0; i < 400; i++){
     var st = new star(window.innerWidth/2, window.innerHeight/2, 6)
-    var directionX = Math.random() >= 0.5? 1 : -1;
-    var directionY = Math.random() >= 0.5? 1 : -1;
-    st.speedX = directionX * Math.random();
-    st.speedY = directionY * Math.random();
-    st.blur = Math.random() * 20;
+    st.reset()
     stArray.push(st);
 }
 
@@ -34,17 +30,25 @@ function star(x, y, radius) {
     this.update = function() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = `rgba(${this.r+=Math.random()}, ${this.g+=Math.random()}, ${this.b+=Math.random()})`;
+        ctx.fillStyle = `rgba(${this.r++},${this.r++},${this.r++})`
         ctx.fill();
         this.x += this.speedX;
         this.y += this.speedY; 
-        // if(this.x + this.width > window.innerWidth || this.x < 0){
-        //     this.speedX = - this.speedX
-        // }
-        // if(this.y + this.height > window.innerHeight || this.y < 0){
-        //     this.speedY = - this.speedY
-        // }
+        if((this.x + this.radius > window.innerWidth || this.x < 0) && (this.y + this.radius > window.innerHeight || this.y < 0)){
+            this.reset()   
+        }
         
+        
+    }
+    this.reset = function(){
+        this.x = window.innerWidth/2
+        this.y = window.innerHeight/2
+        var directionX = Math.random() >= 0.5? 1 : -1;
+        var directionY = Math.random() >= 0.5? 1 : -1;
+        this.speedX = directionX * Math.random() ;
+        this.speedY = directionY * Math.random() ;
+        this.blur = Math.random() * 5;
+        this.r=0
     }
 }
 
