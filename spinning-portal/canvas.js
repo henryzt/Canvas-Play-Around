@@ -14,17 +14,22 @@ window.addEventListener("resize", function(){
     canvas.height = window.innerHeight; 
 })
 
+function randomColorPicker(){
+    var colors = ["#234D51","#9DD3D9","#59C6D1","#3B4F51","#FF513F"]
+    return colors[Math.floor(Math.random()*colors.length)]
+}
+
 for(var i = 0; i < 100; i++){
-    var st = new particlePath(window.innerWidth/2, window.innerHeight/2, Math.random()*canvas.width)
+    var st = new particlePath(window.innerWidth/2, window.innerHeight/2, Math.random()*canvas.width, randomColorPicker())
     st.reset()
     stArray.push(st);
 }
 
 
-function particlePath(x, y, radius) {
+function particlePath(x, y, radius, color) {
     this.radius = radius;
     this.rad = Math.random() * Math.PI * 2
-    this.speed = Math.random() * 0.08;   
+    this.speed = Math.random() * 0.04;   
     this.x = x;
     this.y = y; 
 
@@ -37,7 +42,7 @@ function particlePath(x, y, radius) {
 
         ctx.beginPath()
         // ctx.arc(this.x, this.y, 3, 0, 2 * Math.PI, false);
-        ctx.strokeStyle = "blue"
+        ctx.strokeStyle = color
         ctx.lineWidth = 3
         ctx.moveTo(lastPoint.x,lastPoint.y)
         ctx.lineTo(this.x,this.y)
@@ -62,7 +67,7 @@ function particlePath(x, y, radius) {
 function animate() {
     requestAnimationFrame(animate)
     // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.05)"
+    ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     for(var i = 0; i < stArray.length; i++){
         stArray[i].update();
