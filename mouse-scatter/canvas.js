@@ -6,10 +6,15 @@ canvas.height = window.innerHeight;
 var stArray = []
 
 var mouse = {x:canvas.width/2, y:canvas.height/2}
+var clicked = false
 
 window.addEventListener("mousemove", (event)=>{
     mouse.x = event.clientX
     mouse.y = event.clientY
+})
+
+window.addEventListener("mousedown",function(){
+    clicked = true
 })
 
 
@@ -25,6 +30,12 @@ for(var i = 0; i < 400; i++){
 }
 
 
+var grd1 = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+grd1.addColorStop(0, "#22c1c3");
+grd1.addColorStop(1, "#fdbb2d");
+    
+
+
 function particlePath(x, y, radius) {
     this.radius = radius;
     this.rad = Math.random() * Math.PI * 2
@@ -32,14 +43,30 @@ function particlePath(x, y, radius) {
     this.speedY = 0;    
     this.x = x;
     this.y = y; 
+    this.distance = 100;
 
     this.update = function() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = "white"
+        ctx.fillStyle = grd1
+        
+        if(clicked){
+            ctx.fillStyle = "white"
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = "white";
+            this.distance+=2
+            if(this.distance > 500){
+                clicked = false
+            }
+        }
+        if(!clicked && this.distance > 100){
+            ctx.shadowBlur = 0
+            this.distance -= 2;
+        }
+
         ctx.fill();
-        this.x += Math.cos(this.rad) * 100;
-        this.y += Math.sin(this.rad) * 100; 
+        this.x += Math.cos(this.rad) * this.distance;
+        this.y += Math.sin(this.rad) * this.distance; 
         if((this.x + this.radius > window.innerWidth || this.x < 0) && (this.y + this.radius > window.innerHeight || this.y < 0)){
             this.reset()   
         }
@@ -66,3 +93,4 @@ function animate() {
 
 animate()
 
+//ok canvas is fun, this is created by accident
