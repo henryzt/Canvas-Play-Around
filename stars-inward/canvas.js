@@ -28,10 +28,13 @@ function star(x, y, radius) {
     this.x = x;
     this.y = y; 
     this.blur = 0;  
+    this.r=0
+    this.g=0
+    this.b=0
     this.update = function() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})`;
+        ctx.fillStyle = `rgba(${this.r+=Math.random()}, ${this.g+=Math.random()}, ${this.b+=Math.random()})`;
         ctx.fill();
         this.x += this.speedX;
         this.y += this.speedY; 
