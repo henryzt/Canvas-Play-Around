@@ -26,12 +26,13 @@ var ctx = this.canvas.getContext("2d");
 
 var boxArray = []
 
-for(var i = 0; i < 100; i++){
-    var box = new component(10,10,100,100)
-    box.speedX = Math.random()*8;
-    box.speedY = Math.random()*8;
-    box.x = Math.random()*(window.innerWidth-100);
-    box.y = Math.random()*(window.innerHeight-100);
+for(var i = 0; i < 5; i++){
+    var box = new component(10,10, (Math.random() + 0.5) * 400,(Math.random() + 0.5)*400)
+    box.speedX = Math.random();
+    box.speedY = Math.random();
+    box.x = Math.random()*(window.innerWidth-400);
+    box.y = Math.random()*(window.innerHeight-400);
+    box.blur = Math.random() * 20;
     boxArray.push(box);
 }
 
@@ -44,9 +45,12 @@ function component(x, y, width, height) {
     this.speedX = 0;
     this.speedY = 0;    
     this.x = x;
-    this.y = y;    
+    this.y = y; 
+    this.blur = 0;  
     this.update = function() {
         ctx.fillStyle = createGraditent(this.x, this.y, this.width, this.height);
+        ctx.filter = `blur(${this.blur}px)`;
+        ctx.globalAlpha = 0.5
         ctx.fillRect(this.x, this.y, this.width, this.height);
         this.x += this.speedX;
         this.y += this.speedY; 
