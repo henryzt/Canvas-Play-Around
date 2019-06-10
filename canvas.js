@@ -3,15 +3,20 @@ console.log("hello world.")
 var box;
 
 
+
+
 function createObjects(){
     //create gradient
-    var grd1 = myCanvas.ctx.createLinearGradient(0, 0, window.innerWidth, window.innerHeight);
-    grd1.addColorStop(0, "#7837CF");
-    grd1.addColorStop(1, "#C55E7B");
-    box = new component(10,10,200,200,grd1)
+    box = new component(10,10,200,200)
     box.speedX = 1;
 }
 
+function createGraditent(x,y,w,h){
+    var grd1 = myCanvas.ctx.createLinearGradient(x,y,w,h);
+    grd1.addColorStop(0, "#7837CF");
+    grd1.addColorStop(1, "#C55E7B");
+    return grd1
+}
 
 var myCanvas = {
     canvas : document.querySelector("canvas"),
@@ -32,7 +37,7 @@ var myCanvas = {
 
 
 
-  function component(x, y, width, height, color ) {
+  function component(x, y, width, height) {
     this.width = width;
     this.height = height;
     this.speedX = 0;
@@ -41,7 +46,7 @@ var myCanvas = {
     this.y = y;    
     this.update = function() {
         ctx = myCanvas.ctx;
-        ctx.fillStyle = color;
+        ctx.fillStyle = createGraditent(this.x, this.y, this.width, this.height);
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
   }
