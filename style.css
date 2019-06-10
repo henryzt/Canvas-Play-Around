@@ -1,7 +1,8 @@
 body{
-    background: yellow;
+    background: #021733;
     padding: 0;
     margin: 0;
+    overflow:hidden;
 }
 canvas{
     background: #021733;

@@ -12,7 +12,7 @@ function getMousePos(canvas, evt) {
 
 
 function createGraditent(x,y,w,h){
-    var grd1 = ctx.createLinearGradient(x,y,w,h);
+    var grd1 = ctx.createLinearGradient(x,y,x + w,y + h);
     grd1.addColorStop(0, "#7837CF");
     grd1.addColorStop(1, "#C55E7B");
     return grd1
@@ -23,8 +23,17 @@ var canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight; 
 var ctx = this.canvas.getContext("2d");
-var box = new component(10,10,100,100)
-box.speedX = 10;
+
+var boxArray = []
+
+for(var i = 0; i < 100; i++){
+    var box = new component(10,10,100,100)
+    box.speedX = Math.random()*8;
+    box.speedY = Math.random()*8;
+    box.x = Math.random()*(window.innerWidth-100);
+    box.y = Math.random()*(window.innerHeight-100);
+    boxArray.push(box);
+}
 
 
 
@@ -39,6 +48,8 @@ function component(x, y, width, height) {
     this.update = function() {
         ctx.fillStyle = createGraditent(this.x, this.y, this.width, this.height);
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.x += this.speedX;
+        this.y += this.speedY; 
         if(this.x + this.width > window.innerWidth || this.x < 0){
             this.speedX = - this.speedX
         }
@@ -52,9 +63,9 @@ function component(x, y, width, height) {
 function animate() {
     requestAnimationFrame(animate)
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    box.x += box.speedX;
-    box.y += box.speedY;    
-    box.update();
+    for(var i = 0; i < boxArray.length; i++){
+        boxArray[i].update();
+    }
 }
 
 animate()
