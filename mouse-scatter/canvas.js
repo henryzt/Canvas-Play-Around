@@ -17,8 +17,8 @@ window.addEventListener("mousemove", (event)=>{
 })
 
 window.addEventListener('deviceorientation', function(event) {
-    mouse.x = canvas.width/2 + Math.floor(event.alpha) * 300
-    mouse.y = canvas.height/2 + Math.floor(event.beta) * 300
+    mouse.x = canvas.width/2 + Math.floor(event.alpha)
+    mouse.y = canvas.height/2 + Math.floor(event.beta)
   }, true);
 
 window.addEventListener("mouseup",function(){
