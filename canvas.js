@@ -1,16 +1,5 @@
 console.log("hello world.")
 
-var box;
-
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-      x: evt.clientX - rect.left,
-      y: evt.clientY - rect.top
-    };
-}
-
-
 function createGraditent(x,y,w,h){
     var grd1 = ctx.createLinearGradient(x,y,x + w,y + h);
     grd1.addColorStop(0, "#7837CF");
@@ -20,23 +9,28 @@ function createGraditent(x,y,w,h){
 
 
 var canvas = document.querySelector("canvas");
+
+var ctx = this.canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight; 
-var ctx = this.canvas.getContext("2d");
-
 var boxArray = []
 
+window.addEventListener("resize", function(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight; 
+})
+
 for(var i = 0; i < 5; i++){
-    var box = new component(10,10, (Math.random() + 0.5) * 400,(Math.random() + 0.5)*400)
+    var box = new component(10,10,10,10)
+    box.height = (Math.random() + 0.5) * (window.innerWidth/5)
+    box.width = (Math.random() + 0.5) * (window.innerWidth/5)
     box.speedX = Math.random();
     box.speedY = Math.random();
-    box.x = Math.random()*(window.innerWidth-400);
-    box.y = Math.random()*(window.innerHeight-400);
+    box.x = Math.random()*(window.innerWidth-box.width);
+    box.y = Math.random()*(window.innerHeight-box.height);
     box.blur = Math.random() * 20;
     boxArray.push(box);
 }
-
-
 
 
 function component(x, y, width, height) {
@@ -60,6 +54,7 @@ function component(x, y, width, height) {
         if(this.y + this.height > window.innerHeight || this.y < 0){
             this.speedY = - this.speedY
         }
+        
     }
 }
 
