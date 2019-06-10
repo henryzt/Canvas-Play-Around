@@ -10,7 +10,7 @@ window.addEventListener("resize", function(){
     canvas.height = window.innerHeight; 
 })
 
-for(var i = 0; i < 100; i++){
+for(var i = 0; i < 400; i++){
     var st = new star(window.innerWidth/2, window.innerHeight/2, 6)
     var directionX = Math.random() >= 0.5? 1 : -1;
     var directionY = Math.random() >= 0.5? 1 : -1;
@@ -31,7 +31,7 @@ function star(x, y, radius) {
     this.update = function() {
         ctx.beginPath()
         ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})`;
         ctx.fill();
         this.x += this.speedX;
         this.y += this.speedY; 
