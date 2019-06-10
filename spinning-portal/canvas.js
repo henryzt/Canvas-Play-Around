@@ -24,21 +24,29 @@ for(var i = 0; i < 100; i++){
 function particlePath(x, y, radius) {
     this.radius = radius;
     this.rad = Math.random() * Math.PI * 2
-    this.speed = Math.random() * 0.3;   
+    this.speed = Math.random() * 0.08;   
     this.x = x;
     this.y = y; 
 
     this.update = function() {
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, 3, 0, 2 * Math.PI, false);
-        ctx.fillStyle = "blue"
-        ctx.fill();
+        const lastPoint = {x:this.x, y:this.y}
+
         this.rad += this.speed 
         this.x = x + Math.cos(this.rad) * this.radius;
         this.y = y + Math.sin(this.rad) * this.radius; 
-        if((this.x + this.radius > window.innerWidth || this.x < 0) && (this.y + this.radius > window.innerHeight || this.y < 0)){
-            this.reset()   
-        }
+
+        ctx.beginPath()
+        // ctx.arc(this.x, this.y, 3, 0, 2 * Math.PI, false);
+        ctx.strokeStyle = "blue"
+        ctx.lineWidth = 3
+        ctx.moveTo(lastPoint.x,lastPoint.y)
+        ctx.lineTo(this.x,this.y)
+        ctx.stroke()
+        ctx.closePath()
+        
+        // if((this.x + this.radius > window.innerWidth || this.x < 0) && (this.y + this.radius > window.innerHeight || this.y < 0)){
+        //     this.reset()   
+        // }
         
         
     }
