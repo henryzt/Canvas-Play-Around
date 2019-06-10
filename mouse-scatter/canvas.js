@@ -1,3 +1,6 @@
+/*  created by Henry Zhang
+    coded at 10/Jun/2019    */
+
 var canvas = document.querySelector("canvas");
 
 var ctx = this.canvas.getContext("2d");
@@ -13,7 +16,7 @@ window.addEventListener("mousemove", (event)=>{
     mouse.y = event.clientY
 })
 
-window.addEventListener("mousedown",function(){
+window.addEventListener("mouseup",function(){
     clicked = true
 })
 
@@ -93,4 +96,4 @@ function animate() {
 
 animate()
 
-//ok canvas is fun, this is created by accident
+//ok canvas is fun, this is actually created by accident

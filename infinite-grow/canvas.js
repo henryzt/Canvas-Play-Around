@@ -1,3 +1,6 @@
+/*  created by Henry Zhang
+    coded at 10/Jun/2019    */
+
 var canvas = document.querySelector("canvas");
 
 var ctx = this.canvas.getContext("2d");

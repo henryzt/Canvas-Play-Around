@@ -1,3 +1,6 @@
+/*  created by Henry Zhang
+    coded at 10/Jun/2019    */
+
 console.log("hello world.")
 
 function createGraditent(x,y,w,h){
