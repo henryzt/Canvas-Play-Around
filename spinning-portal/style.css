@@ -9,7 +9,8 @@ canvas{
 
 .center {
     position: absolute;
-    background: #CCD9E0;
+    background: #9DD3D9;
+    color:#234D51;
     font-family: Arial;
     opacity: 0.7;
     text-align: center;
@@ -20,4 +21,12 @@ canvas{
     left: 50%;
     margin-top: -40px;
     margin-left: -200px;
+    
+    animation-name: enter;
+    animation-duration: 2s;
 }
+
+@keyframes enter {
+    from {top: 30%; opacity: 0;}
+    to {opacity: 0.7;}
+  }
