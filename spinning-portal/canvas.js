@@ -15,10 +15,19 @@ var bright = ["#234D51","#9DD3D9","#59C6D1","#3B4F51","#FF513F"]
 var dark = ["#C370FF","#8E66E8","#817DFF","#6684E8","#70B7FF"]
 var colors = darkMode? dark : bright
 
-window.addEventListener("mousedown", function(){
+function startOnHold(){
     document.getElementById("text").className = "center hidden";
     onHold = true
-})
+}
+function endOnHold(){
+    document.getElementById("text").className = "center";
+    onHold = false
+}
+
+window.addEventListener("mousedown", function(){startOnHold()})
+window.addEventListener("mouseup", function(){endOnHold()})
+window.addEventListener("touchstart", function(){startOnHold()})
+window.addEventListener("touchend", function(){endOnHold()})
 
 window.addEventListener("dblclick", function(){
     darkMode = ! darkMode
@@ -28,10 +37,6 @@ window.addEventListener("dblclick", function(){
     this.console.log(colors)
 })
 
-window.addEventListener("mouseup", function(){
-    document.getElementById("text").className = "center";
-    onHold = false
-})
 
 window.addEventListener("resize", function(){
     canvas.width = window.innerWidth;
