@@ -11,6 +11,7 @@ var stArray = []
 var onHold = false;
 var darkMode = true;
 
+//colour picked from https://color.adobe.com/explore
 var bright = ["#234D51","#9DD3D9","#59C6D1","#3B4F51","#FF513F"]
 var dark = ["#C370FF","#8E66E8","#817DFF","#6684E8","#70B7FF"]
 var colors = darkMode? dark : bright
@@ -120,4 +121,3 @@ function animate() {
 }
 
 animate()
-
