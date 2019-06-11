@@ -72,14 +72,14 @@ function star(x, y, radius) {
         
         ctx.fill();
         if(onHold){
-            if(this.speedX < 10){
-                this.speedX +=0.1
-                this.speedY +=0.1
+            if(this.speedX < 30){
+                this.speedX *= 1.1
+                this.speedY *= 1.1
             }
         }
         if(!onHold && this.speedX > this.lastSpeedX){
-            this.speedX -=0.1
-            this.speedY -=0.1
+            this.speedX /= 1.1
+            this.speedY /= 1.1
         }
         this.x += this.speedX;
         this.y += this.speedY; 
