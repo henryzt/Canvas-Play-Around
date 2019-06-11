@@ -41,16 +41,25 @@ function particlePath(x, y, radius, color) {
     this.radius = radius;
     this.rad = Math.random() * Math.PI * 2
     this.speed = Math.random() * 0.01;   
+    this.lastSpeed = this.speed
     this.x = x;
     this.y = y; 
 
     this.update = function() {
         const lastPoint = {x:this.x, y:this.y}
 
-        this.rad += onHold? this.speed * 4: this.speed
+        this.rad += this.speed
         this.x = x + Math.cos(this.rad) * this.radius;
         this.y = y + Math.sin(this.rad) * this.radius; 
-
+        
+        if(onHold){
+            if(this.speed < 0.2){
+                this.speed +=0.00005
+            }
+        }
+        if(!onHold && this.speed > this.lastSpeed){
+            this.speed-=0.0001;
+        }
 
         ctx.beginPath()
         ctx.strokeStyle = color
