@@ -9,10 +9,23 @@ canvas.height = window.innerHeight;
 var stArray = []
 
 var onHold = false;
+var darkMode = true;
+
+var bright = ["#234D51","#9DD3D9","#59C6D1","#3B4F51","#FF513F"]
+var dark = ["#C370FF","#8E66E8","#817DFF","#6684E8","#70B7FF"]
+var colors = darkMode? dark : bright
 
 window.addEventListener("mousedown", function(){
     document.getElementById("text").className = "center hidden";
     onHold = true
+})
+
+window.addEventListener("dblclick", function(){
+    darkMode = ! darkMode
+    colors = darkMode? dark : bright
+    textColor = darkMode? "white" : "#234D51"
+    document.getElementById("text").style.color = textColor;
+    this.console.log(colors)
 })
 
 window.addEventListener("mouseup", function(){
@@ -26,8 +39,7 @@ window.addEventListener("resize", function(){
 })
 
 function randomColorPicker(){
-    var colors = ["#234D51","#9DD3D9","#59C6D1","#3B4F51","#FF513F"]
-    return colors[Math.floor(Math.random()*colors.length)]
+    return Math.floor(Math.random()*colors.length)
 }
 
 for(var i = 0; i < 100; i++){
@@ -37,7 +49,7 @@ for(var i = 0; i < 100; i++){
 }
 
 
-function particlePath(x, y, radius, color) {
+function particlePath(x, y, radius, colorInt) {
     this.radius = radius;
     this.rad = Math.random() * Math.PI * 2
     this.speed = Math.random() * 0.01;   
@@ -62,16 +74,16 @@ function particlePath(x, y, radius, color) {
         }
 
         ctx.beginPath()
-        ctx.strokeStyle = color
+        ctx.strokeStyle = colors[colorInt]
         ctx.lineWidth = 3
         ctx.moveTo(lastPoint.x,lastPoint.y)
         ctx.lineTo(this.x,this.y)
         ctx.stroke()
         ctx.closePath()
 
-        // if(!onHold){
+        // if(!onHold && lastPoint != x){
         //     ctx.shadowBlur = 5;
-        //     ctx.shadowColor = color;
+        //     ctx.shadowColor = colors[colorInt];
         // }else{
         //     ctx.shadowBlur = 0;
         // }
@@ -88,11 +100,10 @@ function particlePath(x, y, radius, color) {
 
 function animate() {
     requestAnimationFrame(animate)
-    if(!onHold){
-        ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
-    }else{
-        ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
-    }
+    var rgb = darkMode ? "0, 0, 0" : "255, 255, 255"
+    var alpha = onHold ? "0.1" : "0.5"
+    ctx.fillStyle = `rgba(${rgb}, ${alpha})`
+
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     for(var i = 0; i < stArray.length; i++){
         stArray[i].update();
