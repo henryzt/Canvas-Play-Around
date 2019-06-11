@@ -11,10 +11,12 @@ var stArray = []
 var onHold = false;
 
 window.addEventListener("mousedown", function(){
+    document.getElementById("text").className = "center hidden";
     onHold = true
 })
 
 window.addEventListener("mouseup", function(){
+    document.getElementById("text").className = "center";
     onHold = false
 })
 
@@ -45,18 +47,11 @@ function particlePath(x, y, radius, color) {
     this.update = function() {
         const lastPoint = {x:this.x, y:this.y}
 
-        this.rad += this.speed 
+        this.rad += onHold? this.speed * 4: this.speed
         this.x = x + Math.cos(this.rad) * this.radius;
         this.y = y + Math.sin(this.rad) * this.radius; 
 
-        if(!onHold){
-            ctx.beginPath()
-            ctx.arc(x, y, this.radius, 0, 2 * Math.PI, false);
-            ctx.lineWidth = 1
-            ctx.strokeStyle = "rgba(230, 230, 230, 0.5)"
-            ctx.stroke()
-            ctx.closePath()
-        }
+
         ctx.beginPath()
         ctx.strokeStyle = color
         ctx.lineWidth = 3
@@ -64,11 +59,13 @@ function particlePath(x, y, radius, color) {
         ctx.lineTo(this.x,this.y)
         ctx.stroke()
         ctx.closePath()
-        
-        // if((this.x + this.radius > window.innerWidth || this.x < 0) && (this.y + this.radius > window.innerHeight || this.y < 0)){
-        //     this.reset()   
+
+        // if(!onHold){
+        //     ctx.shadowBlur = 5;
+        //     ctx.shadowColor = color;
+        // }else{
+        //     ctx.shadowBlur = 0;
         // }
-        
         
     }
     this.reset = function(){
@@ -83,11 +80,11 @@ function particlePath(x, y, radius, color) {
 function animate() {
     requestAnimationFrame(animate)
     if(!onHold){
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
     }else{
         ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
-        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     }
+    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     for(var i = 0; i < stArray.length; i++){
         stArray[i].update();
     }
