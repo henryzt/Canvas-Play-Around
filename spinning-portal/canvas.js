@@ -8,6 +8,15 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight; 
 var stArray = []
 
+var onHold = false;
+
+window.addEventListener("mousedown", function(){
+    onHold = true
+})
+
+window.addEventListener("mouseup", function(){
+    onHold = false
+})
 
 window.addEventListener("resize", function(){
     canvas.width = window.innerWidth;
@@ -40,11 +49,14 @@ function particlePath(x, y, radius, color) {
         this.x = x + Math.cos(this.rad) * this.radius;
         this.y = y + Math.sin(this.rad) * this.radius; 
 
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-        ctx.strokeStyle = "grey"
-        ctx.stroke()
-        ctx.closePath()
+        if(!onHold){
+            ctx.beginPath()
+            ctx.arc(x, y, this.radius, 0, 2 * Math.PI, false);
+            ctx.lineWidth = 1
+            ctx.strokeStyle = "rgba(230, 230, 230, 0.5)"
+            ctx.stroke()
+            ctx.closePath()
+        }
         ctx.beginPath()
         ctx.strokeStyle = color
         ctx.lineWidth = 3
@@ -70,9 +82,12 @@ function particlePath(x, y, radius, color) {
 
 function animate() {
     requestAnimationFrame(animate)
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    // ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
-    // ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    if(!onHold){
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }else{
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
+        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    }
     for(var i = 0; i < stArray.length; i++){
         stArray[i].update();
     }
