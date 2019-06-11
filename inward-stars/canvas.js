@@ -49,8 +49,7 @@ function star(x, y, radius) {
     this.radius = radius;
     this.speedX = 0;
     this.speedY = 0;   
-    this.lastSpeedX = this.speedX
-    this.lastSpeedY = this.speedY
+    
     this.x = x;
     this.y = y; 
     this.blur = 0;  
@@ -70,23 +69,24 @@ function star(x, y, radius) {
         // }
         
         
-        ctx.fill();
+        
         if(onHold){
+            // ctx.fillStyle = `rgba(${this.color}, 1)`
             if(this.speedX < 30){
-                this.speedX *= 1.1
-                this.speedY *= 1.1
+                this.speedX *= 1.02
+                this.speedY *= 1.02
             }
         }
         if(!onHold && this.speedX > this.lastSpeedX){
-            this.speedX /= 1.1
-            this.speedY /= 1.1
+            this.speedX /= 1.02
+            this.speedY /= 1.02
         }
         this.x += this.speedX;
         this.y += this.speedY; 
         if((this.x + this.radius > window.innerWidth || this.x < 0) && (this.y + this.radius > window.innerHeight || this.y < 0)){
             this.reset()   
         }
-        
+        ctx.fill();
         
     }
     this.reset = function(){
@@ -94,6 +94,8 @@ function star(x, y, radius) {
         var directionY = Math.random() >= 0.5? 1 : -1;
         this.speedX = directionX * Math.random() ;
         this.speedY = directionY * Math.random() ;
+        this.lastSpeedX = this.speedX
+        this.lastSpeedY = this.speedY
         var random = Math.random() //random displacement
         this.x = window.innerWidth/2 + this.speedX * random * window.innerWidth/2
         this.y = window.innerHeight/2 + this.speedY * random * window.innerHeight/2
