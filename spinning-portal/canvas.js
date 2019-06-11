@@ -42,7 +42,7 @@ function randomColorPicker(){
     return Math.floor(Math.random()*colors.length)
 }
 
-for(var i = 0; i < 100; i++){
+for(var i = 0; i < 300; i++){
     var st = new particlePath(window.innerWidth/2, window.innerHeight/2, Math.random()*canvas.width, randomColorPicker())
     st.reset()
     stArray.push(st);
@@ -67,10 +67,14 @@ function particlePath(x, y, radius, colorInt) {
         if(onHold){
             if(this.speed < 0.2){
                 this.speed +=0.00005
+                this.radius += 0.2
+            }else{
+                console.log(this.speed)
             }
         }
         if(!onHold && this.speed > this.lastSpeed){
             this.speed-=0.0001;
+            this.radius -= 0.4
         }
 
         ctx.beginPath()
@@ -100,7 +104,7 @@ function particlePath(x, y, radius, colorInt) {
 
 function animate() {
     requestAnimationFrame(animate)
-    var rgb = darkMode ? "0, 0, 0" : "255, 255, 255"
+    var rgb = darkMode ? "0, 0, 0" : "240, 240, 240"
     var alpha = onHold ? "0.1" : "0.5"
     ctx.fillStyle = `rgba(${rgb}, ${alpha})`
 
