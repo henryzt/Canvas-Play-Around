@@ -9,7 +9,8 @@ canvas.height = window.innerHeight;
 var stArray = []
 
 var onHold = false;
-var opacity = 1; //of the rect
+var opacity = 0.1; //of the rect
+var yDisplace = 1.02;
 
 function startOnHold(){
     // document.getElementById("text").className = "center hidden";
@@ -19,6 +20,10 @@ function endOnHold(){
     // document.getElementById("text").className = "center";
     onHold = false
 }
+
+window.addEventListener("dblclick", function(){
+    yDisplace = (yDisplace == 1.001) ? 1.02 : 1.001  
+})
 
 window.addEventListener("mousedown", function(){startOnHold()})
 window.addEventListener("mouseup", function(){endOnHold()})
@@ -57,36 +62,32 @@ function star(x, y, radius) {
     this.maxAplha = 0.5
     this.first=true
     this.update = function() {
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
+        const lastPoint = {x:this.x, y:this.y}
         if(this.alpha < this.maxAplha){ this.alpha+=0.01 }
-        ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`
-        // if(onHold){
-        //     ctx.shadowBlur = 0
-        // }else if(opacity == 1){
-        //     ctx.shadowBlur = 5;
-        //     ctx.shadowColor = `rgba(${this.color}, ${this.alpha})`
-        // }
-        
-        
-        
+
         if(onHold){
-            // ctx.fillStyle = `rgba(${this.color}, 1)`
             if(this.speedX < 30){
                 this.speedX *= 1.02
-                this.speedY *= 1.02
+                this.speedY *= yDisplace
             }
         }
         if(!onHold && this.speedX > this.lastSpeedX){
             this.speedX /= 1.02
-            this.speedY /= 1.02
+            this.speedY /= yDisplace
         }
         this.x += this.speedX;
         this.y += this.speedY; 
         if((this.x + this.radius > window.innerWidth || this.x < 0) && (this.y + this.radius > window.innerHeight || this.y < 0)){
             this.reset()   
         }
-        ctx.fill();
+        
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(${this.color}, ${this.alpha})`
+        ctx.lineWidth = 3
+        ctx.moveTo(lastPoint.x,lastPoint.y)
+        ctx.lineTo(this.x,this.y)
+        ctx.stroke()
+        ctx.closePath()
         
     }
     this.reset = function(){
@@ -112,7 +113,7 @@ function animate() {
     if(onHold && opacity > 0.05){
         opacity-=0.01
     }
-    if(!onHold && opacity < 1){
+    if(!onHold && opacity < 0.1){
         opacity+=0.01
     }
     ctx.fillStyle = `rgba(0, 0, 0, ${opacity})`
