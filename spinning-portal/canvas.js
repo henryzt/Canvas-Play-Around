@@ -54,7 +54,7 @@ for(var i = 0; i < 300; i++){
     stArray.push(st);
 }
 
-
+//circular motion ref: youtu.be/raXW5J1Te7Y
 function particlePath(x, y, radius, colorInt) {
     this.radius = radius;
     this.rad = Math.random() * Math.PI * 2
