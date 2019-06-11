@@ -29,7 +29,7 @@ for(var i = 0; i < 100; i++){
 function particlePath(x, y, radius, color) {
     this.radius = radius;
     this.rad = Math.random() * Math.PI * 2
-    this.speed = Math.random() * 0.04;   
+    this.speed = Math.random() * 0.01;   
     this.x = x;
     this.y = y; 
 
@@ -41,7 +41,11 @@ function particlePath(x, y, radius, color) {
         this.y = y + Math.sin(this.rad) * this.radius; 
 
         ctx.beginPath()
-        // ctx.arc(this.x, this.y, 3, 0, 2 * Math.PI, false);
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        ctx.strokeStyle = "grey"
+        ctx.stroke()
+        ctx.closePath()
+        ctx.beginPath()
         ctx.strokeStyle = color
         ctx.lineWidth = 3
         ctx.moveTo(lastPoint.x,lastPoint.y)
@@ -66,9 +70,9 @@ function particlePath(x, y, radius, color) {
 
 function animate() {
     requestAnimationFrame(animate)
-    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // ctx.fillStyle = "rgba(255, 255, 255, 0.1)"
+    // ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     for(var i = 0; i < stArray.length; i++){
         stArray[i].update();
     }
