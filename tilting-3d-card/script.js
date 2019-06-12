@@ -2,12 +2,14 @@
     coded at 12/Jun/2019    */
 
 
-var mouse = {x:window.innerWidth/2, y:window.innerHeight/2}
-var clicked = false
-
 window.addEventListener("mousemove", (event)=>{
-    mouse.x = event.clientX
-    mouse.y = event.clientY
+    let mouseX = event.clientX
+    let mouseY = event.clientY
+    let halfWidth = window.innerWidth/2
+    let halfHeight = window.innerHeight/2 
+    let xdeg = (mouseX - halfWidth)/halfWidth * 10;
+    let ydeg = (mouseY - halfHeight)/halfHeight * 10;
+    document.getElementById("card").style.transform = `rotateX(${ydeg}deg) rotateY(${xdeg}deg)`;
 })
 
     
