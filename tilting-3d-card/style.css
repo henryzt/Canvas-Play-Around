@@ -17,3 +17,19 @@ body{
     border-radius: 15px;
     box-shadow: -4px 18px 51px -19px rgba(214,185,0,1);
 }
+
+/* ref https://blog.logrocket.com/the-noobs-guide-to-3d-transforms-with-css-7370aafd9edf/ */
+
+.scene {    
+    /* This is important! for z-axis effects */
+    perspective: 30em;
+  }
+
+  .x-axis {
+    animation: x-axis-animation 1s ease-in-out 0s infinite alternate;
+  }
+
+  @keyframes x-axis-animation {
+    from {transform: rotateX(20deg) rotateY(20deg)}
+    to {transform: rotateX(-20deg) rotateY(20deg)}
+  }
