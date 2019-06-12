@@ -1,7 +1,7 @@
 /*  created by Henry Zhang
     coded at 12/Jun/2019    */
 
-var imgUrl = "https://muchneededtherapydotblog.files.wordpress.com/2018/08/lockscreen_vultre-damask2.jpg"
+var imgUrl = "img/top-vulture-yellow.jpg"
 var card = document.getElementById("card");
 updateReflection(100,0)
 
