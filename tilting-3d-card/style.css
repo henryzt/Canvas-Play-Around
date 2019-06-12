@@ -29,7 +29,6 @@ body{
 /* ref https://blog.logrocket.com/the-noobs-guide-to-3d-transforms-with-css-7370aafd9edf/ */
 
 .scene {    
-    /* This is important! for z-axis effects */
     perspective: 30em;
   }
 
