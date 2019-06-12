@@ -10,8 +10,7 @@ body{
     height: 100vh;
 }
 .card{
-    background: url("https://muchneededtherapydotblog.files.wordpress.com/2018/08/lockscreen_vultre-damask2.jpg");
-    background-size: cover;
+    
     height: 360px;
     width: 600px;
     border-radius: 15px;
