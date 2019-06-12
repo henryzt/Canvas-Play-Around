@@ -17,9 +17,20 @@ window.addEventListener("mousemove", (event)=>{
     card.style.transform = `rotateX(${ydeg * 10}deg) rotateY(${xdeg * 10}deg)`;
 })
 
+window.ondevicemotion = function(event) {
+	var accelerationX = event.accelerationIncludingGravity.x;
+	var accelerationY = event.accelerationIncludingGravity.y;
+    var accelerationZ = event.accelerationIncludingGravity.z;
+    // console.log(`${accelerationX},${accelerationY},${accelerationZ}`)
+    let xdeg = accelerationX/10;
+    let ydeg = accelerationY/10;
+    updateReflection(ydeg * 180, xdeg * 100)
+    card.style.transform = `rotateX(${ydeg * 20}deg) rotateY(${xdeg * 20}deg)`;
+}
+
 
 function updateReflection(degree,percentage){
-    card.style.background = `linear-gradient(${degree}deg, rgba(255,255,255,0) 0%,rgba(255,255,255,0.35) ${percentage}%,rgba(255,255,255,0) 100%), url('${imgUrl}')`
+    card.style.background = `linear-gradient(${degree}deg, rgba(255,255,255,0) 0%,rgba(255,255,255,0.5) ${percentage}%,rgba(255,255,255,0) 100%), url('${imgUrl}')`
     card.style.backgroundSize = "cover"
 }
 
