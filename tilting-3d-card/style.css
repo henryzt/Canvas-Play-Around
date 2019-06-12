@@ -1,0 +1,19 @@
+body{
+    background: url('https://muchneededtherapydotblog.files.wordpress.com/2018/08/lockscreen_vultre-damask1.jpg');
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    overflow:hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.card{
+    background: url("https://muchneededtherapydotblog.files.wordpress.com/2018/08/lockscreen_vultre-damask2.jpg");
+    background-size: cover;
+    height: 360px;
+    width: 600px;
+    border-radius: 15px;
+    box-shadow: -4px 18px 51px -19px rgba(214,185,0,1);
+}
