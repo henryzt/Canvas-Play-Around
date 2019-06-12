@@ -30,6 +30,6 @@ body{
   }
 
   @keyframes x-axis-animation {
-    from {transform: rotateX(20deg) rotateY(20deg)}
-    to {transform: rotateX(-20deg) rotateY(20deg)}
+    from {transform: rotateX(20deg) rotateY(80deg)}
+    to {transform: rotateX(-20deg) rotateY(-80deg)}
   }
