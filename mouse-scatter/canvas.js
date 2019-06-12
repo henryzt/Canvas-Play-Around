@@ -16,10 +16,14 @@ window.addEventListener("mousemove", (event)=>{
     mouse.y = event.clientY
 })
 
-window.addEventListener('deviceorientation', function(event) {
-    mouse.x = canvas.width/2 + Math.floor(event.alpha)
-    mouse.y = canvas.height/2 + Math.floor(event.beta)
-  }, true);
+
+window.ondevicemotion = function(event) {
+    var accelerationX = event.accelerationIncludingGravity.x/10;
+    var accelerationY = event.accelerationIncludingGravity.y/10;
+    mouse.x = (1 + accelerationX) * canvas.width/2
+    mouse.y = (1 + accelerationY) * canvas.height/2
+}
+
 
 window.addEventListener("mouseup",function(){
     clicked = true
